@@ -7,17 +7,17 @@ public class Graph {
 	/**
 	 * Number of vertices.
 	 */
-	private int n;
+	public int n;
 	
 	/**
 	 * Number of edges.
 	 */
-	private int e;
+	public int e;
 	
 	/**
 	 * Adjacency matrix.
 	 */
-	private int[][] adjMatrix;
+	public int[][] adjMatrix;
 	
 	// ----------------------------------------------------------------------------
 	// -------------------------------- Methods -----------------------------------
