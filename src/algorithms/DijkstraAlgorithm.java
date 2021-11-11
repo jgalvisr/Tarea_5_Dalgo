@@ -14,12 +14,13 @@ public class DijkstraAlgorithm implements MinimumCostPathAlgorithm {
 		int[][] minCosts = new int[V][V];
 		
 		for (int source = 0; source < V; source ++) {
+			System.out.println("Source: " + source);
 			Set<Integer> visited = new HashSet<>();
 			int[] distances = new int[V];
 			
-			distances[source] = 0;
-			for (int i : distances)
+			for (int i = 0; i < V; i++)
 				distances[i] = Integer.MAX_VALUE;
+			distances[source] = 0;
 			
 			int v = source;
 			while (visited.size() != V) {
@@ -34,6 +35,9 @@ public class DijkstraAlgorithm implements MinimumCostPathAlgorithm {
 						if (newDist < knownDist)
 							distances[w] = newDist;
 					}
+					
+//					int nextV = -1;
+//					int lowestDist = Integer.MAX_VALUE;
 					
 					if (!visited.contains(w) && v != w && distances[w] < lowestDist) {
 						nextV = w;
