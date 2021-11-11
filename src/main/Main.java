@@ -37,9 +37,11 @@ public class Main {
 					break;
 				}
 				try {
-					printResult(algoritmo.findMinimumCostMatrix(g));
+					//printResult(algoritmo.findMinimumCostMatrix(g));
+					algoritmo.findMinimumCostMatrix(g);
 				} catch (Exception e) {
 					System.out.println("Input invalido.");
+					e.printStackTrace();
 				}
 			}
 			else if(opc.equals("2"))
@@ -91,7 +93,6 @@ public class Main {
 
 	public static void printMenu()
 	{
-		//System.out.println("\n\n\n\n\n\n\n\n");
 		System.out.println("1. Parte 1");
 		System.out.println("2. Parte 2");
 		System.out.println("3. Parte 3");
@@ -112,7 +113,7 @@ public class Main {
 		for (int i = 0; i < minCosts.length; i++) {
 			for (int j = 0; j < minCosts.length; j++) {
 				String v = minCosts[i][j] == Integer.MAX_VALUE ? "i" : minCosts[i][j]+"";
-				System.out.print(minCosts[i][j] + " ");
+				System.out.print(v + " ");
 			}
 			System.out.println();
 		}

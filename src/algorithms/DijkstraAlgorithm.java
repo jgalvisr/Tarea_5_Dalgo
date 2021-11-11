@@ -10,11 +10,12 @@ public class DijkstraAlgorithm implements MinimumCostPathAlgorithm {
 
 	@Override
 	public int[][] findMinimumCostMatrix(Graph g) {
+		long start = System.currentTimeMillis();
+		
 		int V = g.getNumVertices();
 		int[][] minCosts = new int[V][V];
 		
 		for (int source = 0; source < V; source ++) {
-			System.out.println("Source: " + source);
 			Set<Integer> visited = new HashSet<>();
 			int[] distances = new int[V];
 			
@@ -23,10 +24,12 @@ public class DijkstraAlgorithm implements MinimumCostPathAlgorithm {
 			distances[source] = 0;
 			
 			int v = source;
-			while (visited.size() != V) {
+			int nextV = 0;
+			int lowestDist;
+			while (visited.size() != V && nextV != -1) {
 				int[] adjacentCosts = g.getAdjacentVerticesCosts(v);
-				int nextV = -1;
-				int lowestDist = Integer.MAX_VALUE;
+				nextV = -1;
+				lowestDist = Integer.MAX_VALUE;
 				
 				for (int w = 0; w < adjacentCosts.length; w ++) {
 					if (!visited.contains(w) && adjacentCosts[w] > 0) {
@@ -35,9 +38,6 @@ public class DijkstraAlgorithm implements MinimumCostPathAlgorithm {
 						if (newDist < knownDist)
 							distances[w] = newDist;
 					}
-					
-//					int nextV = -1;
-//					int lowestDist = Integer.MAX_VALUE;
 					
 					if (!visited.contains(w) && v != w && distances[w] < lowestDist) {
 						nextV = w;
@@ -50,6 +50,9 @@ public class DijkstraAlgorithm implements MinimumCostPathAlgorithm {
 			
 			minCosts[source] = distances;
 		}
+		
+		long finish = System.currentTimeMillis();
+		System.out.println("Tiempo: " + (finish - start));
 		
 		return minCosts;
 	}

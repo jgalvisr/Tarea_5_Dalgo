@@ -6,6 +6,8 @@ public class BellmanFordAlgorithm implements MinimumCostPathAlgorithm {
 
 	@Override
 	public int[][] findMinimumCostMatrix(Graph g) {
+		long start = System.currentTimeMillis();
+		
 		int V = g.getNumVertices();
 		int[][] minCosts = new int[V][V];
 		
@@ -31,6 +33,10 @@ public class BellmanFordAlgorithm implements MinimumCostPathAlgorithm {
 			}
 			minCosts[source] = distances;
 		}
+		
+		long finish = System.currentTimeMillis();
+		System.out.println("Tiempo: " + (finish - start));
+		
 		return minCosts;
 	}
 
