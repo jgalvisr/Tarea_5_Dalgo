@@ -7,9 +7,29 @@ import data_structures.Graph;
 
 public class Main {
 	
+	private static Graph g = null;
 	
 	public static void main(String[] args) {
 		loadData();
+		printMenu();
+		Scanner sc = new Scanner(System.in);
+		String opc = sc.nextLine();
+		while(!opc.equals("4"))
+		{
+			if(opc.equals("1"))
+			{
+				
+			}
+			else if(opc.equals("2"))
+			{
+	
+			}
+			else if(opc.equals("3"))
+			{
+				
+			}
+		}
+
 	}
 	
 	public static void loadData()
@@ -22,7 +42,6 @@ public class Main {
 			File f = new File("./data/"+path+".txt");
 			Scanner sc_f = new Scanner(f);
 			String data;
-			Graph g = null;
 			int i = 0;
 			
 			while( sc_f.hasNextLine() && (data = sc_f.nextLine()) != null)
@@ -38,9 +57,8 @@ public class Main {
 				}
 				i += 1;
 			}
-			sc.close();
 			sc_f.close();
-			
+			sc.close();
 		}
 		
 		catch(Exception e)
@@ -49,4 +67,12 @@ public class Main {
 		}
 	}
 
+	public static void printMenu()
+	{
+		System.out.println("\n\n\n\n\n\n\n\n");
+		System.out.println("1. Parte 1");
+		System.out.println("2. Parte 2");
+		System.out.println("3. Parte 3");
+		System.out.println("4. Salir");
+	}
 }

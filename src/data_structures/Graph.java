@@ -1,5 +1,9 @@
 package data_structures;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Graph data structure.
  */
@@ -7,17 +11,17 @@ public class Graph {
 	/**
 	 * Number of vertices.
 	 */
-	public int n;
+	private int n;
 	
 	/**
 	 * Number of edges.
 	 */
-	public int e;
+	private int e;
 	
 	/**
 	 * Adjacency matrix.
 	 */
-	public int[][] adjMatrix;
+	private int[][] adjMatrix;
 	
 	// ----------------------------------------------------------------------------
 	// -------------------------------- Methods -----------------------------------
@@ -94,5 +98,45 @@ public class Graph {
 	 */
 	public int[] getAdjacentVerticesCosts(int i) {
 		return adjMatrix[i];
+	}
+	
+	public void dfs(int start, boolean[] visited)
+	{
+		System.out.println(start);
+		visited[start] = true;
+		
+		for(int i = 0; i < n; i++)
+		{
+			if(adjMatrix[start][i] == 1 && (!visited[i]))
+			{
+				dfs(i, visited);
+			}
+		}
+	}
+	
+	public void bfs(int v)
+	{
+		boolean[] visited = new boolean[v];
+		Arrays.fill(visited, false);
+		List<Integer> q = new ArrayList<>();
+		q.add(v);
+		visited[v] = true;
+		
+		int vis;
+		while(!q.isEmpty()) 
+		{
+			vis = q.get(0);
+			System.out.println(vis);
+			q.remove(q.get(0));
+			for(int i = 0; i < v; i++)
+			{
+				if (adjMatrix[vis][i] == 1 && (!visited[i]))
+				{
+					q.add(i);
+					visited[i] = true;
+				}
+			}
+		}
+		
 	}
 }
