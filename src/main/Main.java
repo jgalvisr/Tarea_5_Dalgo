@@ -1,6 +1,8 @@
 package main;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import algorithms.BellmanFordAlgorithm;
@@ -16,6 +18,7 @@ public class Main {
 	public static void main(String[] args) {
 		loadData();
 		printMenu();
+		Scanner sc2= new Scanner(System.in);
 		Scanner sc = new Scanner(System.in);
 		String opc = sc.nextLine();
 		while(!opc.equals("4"))
@@ -44,12 +47,33 @@ public class Main {
 			}
 			else if(opc.equals("2"))
 			{
-	
+				ArrayList<String> output = new ArrayList<>();
+				for(int i = 0; i < g.getNumVertices(); i++)
+				{
+					String answer = g.bfs(i);
+					
+					while(answer.indexOf(Integer.toString(i)) != -1)
+					{
+						i += 1;
+					}
+					output.add(answer.substring(0, answer.length()-2)+"}");
+				}
+				System.out.println(Arrays.toString(output.toArray()));
 			}
 			else if(opc.equals("3"))
 			{
-				
+				boolean[] visited = new boolean[g.getNumVertices()];
+				Arrays.fill(visited, false);
+				ArrayList order = new ArrayList<Integer>();
+				boolean s = g.dfs(0, visited, order);
+				System.out.println((s == true ? "Si tiene ciclos": "No tiene ciclos"));
+				if(!s)
+				{
+					System.out.println(Arrays.toString(order.toArray()));
+				}
 			}
+			System.out.println("Ingrese una opción: ");
+			opc = sc2.nextLine();
 		}
 
 	}
@@ -69,6 +93,7 @@ public class Main {
 			while( sc_f.hasNextLine() && (data = sc_f.nextLine()) != null)
 			{
 				String[] elements = data.replaceAll("\\s+", ",").split(",");
+				System.out.println(Arrays.toString(elements) + elements.length);
 				if(g == null)
 				{
 					g = new Graph(elements.length);
@@ -81,8 +106,8 @@ public class Main {
 			}
 //			sc_f.close();
 //			sc.close();
+			System.out.println(g.getNumVertices() +"--"+g.getNumEdges());
 		}
-		
 		catch(Exception e)
 		{
 			e.printStackTrace();

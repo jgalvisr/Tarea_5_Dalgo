@@ -100,43 +100,53 @@ public class Graph {
 		return adjMatrix[i];
 	}
 	
-	public void dfs(int start, boolean[] visited)
+	public boolean dfs(int start, boolean[] visited, ArrayList<Integer> order)
 	{
-		System.out.println(start);
 		visited[start] = true;
 		
 		for(int i = 0; i < n; i++)
 		{
-			if(adjMatrix[start][i] == 1 && (!visited[i]))
+			if(adjMatrix[start][i] > 1 && (!visited[i]))
 			{
-				dfs(i, visited);
+				if(order.indexOf(i) == -1)
+				{
+					//wait
+				}
+				return dfs(i, visited, order);
+			}
+			else if(visited[i] && start != i)
+			{
+				return true;
+				
 			}
 		}
+		return false;
 	}
 	
-	public void bfs(int v)
+	public String bfs(int v)
 	{
-		boolean[] visited = new boolean[v];
+		boolean[] visited = new boolean[n];
 		Arrays.fill(visited, false);
 		List<Integer> q = new ArrayList<>();
 		q.add(v);
 		visited[v] = true;
-		
 		int vis;
+		String ans = "{"+v+", ";
 		while(!q.isEmpty()) 
 		{
 			vis = q.get(0);
-			System.out.println(vis);
 			q.remove(q.get(0));
-			for(int i = 0; i < v; i++)
+			for(int i = 0; i < n; i++)
 			{
-				if (adjMatrix[vis][i] == 1 && (!visited[i]))
+				if (adjMatrix[vis][i] > 0 && (!visited[i]))
 				{
+					
 					q.add(i);
 					visited[i] = true;
+					ans += i+", ";
 				}
 			}
 		}
-		
+		return ans;	
 	}
 }
